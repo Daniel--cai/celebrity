@@ -7,13 +7,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
+function greeter(person: string) {
+    return "Helsdgsdglo";
+}
 export default {
   name: 'apps',
   data () {
     return {
       msg: 'Celebrity',
-      hover: 'hello',
+      hover: greeter("ddf"),
       seen: true
     }
   }
