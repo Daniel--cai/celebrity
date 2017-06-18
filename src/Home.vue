@@ -1,9 +1,10 @@
 <template>
   <div id="home" class="container">
   <p>
-    `lsdkfgjlskdjg`
+    `lsdkfgjlsksderedssdfg`
     <router-link to="/">Go to Home</router-link>
   </p>
+
   </div>
 </template>
 

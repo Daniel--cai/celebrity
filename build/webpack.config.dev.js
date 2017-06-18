@@ -1,8 +1,12 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.ts',
+  entry: [
+    'webpack-hot-middleware/client',
+    './src/main.ts'
+  ],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -45,33 +49,15 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true
-  },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
+  devtool: '#eval-source-map',
+  plugins:[
+    new HtmlWebpackPlugin({
+      template:'index.html'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 }

@@ -1,10 +1,10 @@
 <template>
     <div id="select" class="jumbotron">
       <h3>{{msg}}   <b-badge>{{listName.length}}</b-badge></h3>
-      <b-form-input type="text" v-model="inputName" placeholder="Enter a name"></b-form-input>
+      <b-form-input class="col-md-12" type="text" v-model="inputName" placeholder="Enter a name"></b-form-input>
       
-      <b-btn  @click="clicked"  :disabled="inputName ? false : true">Add</b-btn>
-      <b-btn  router-link to="/Home" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
+      <b-btn  class="col-md-4" @click="clicked"  :disabled="inputName ? false : true">Add</b-btn>
+      <b-btn  class="col-md-4" router-link to="/Home" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
       
     </div>
    <!--
@@ -30,21 +30,12 @@ import Vue from 'vue'
 import Component, { createDecorator } from 'vue-class-component'
 import { mapGetters, mapState } from 'vuex'
 
-function Getter (getterType) {
+function Getter (getterType: string) {
   return createDecorator((options, key) => {
     if (!options.computed) options.computed = {}
     options.computed[key] = function () {
       return this.$store.getters[getterType]
     }
-  })
-}
-
-function Dispatch (mutationType, payload){
-  return createDecorator((options,key)=>{
-      if (!options.methods) options.methods = {}
-      options.methods[key] = function(){
-        return this.$store.commit(mutationType, payload)
-      }
   })
 }
 
@@ -54,7 +45,7 @@ export default class Index extends Vue {
   seen: boolean = true;
   @Getter('NAMES') listName: Array<string>
   @Getter('COUNTER') counter: Number;
-  clicked(){
+  clicked() : void {
     if (this.inputName){
       this.$store.commit('ADD_NAME', {name:this.inputName})
     }
