@@ -1,28 +1,19 @@
 <template>
     <div id="select" class="jumbotron">
-      <h3>{{msg}}   <b-badge>{{listName.length}}</b-badge></h3>
-      <b-form-input class="col-md-12" type="text" v-model="inputName" placeholder="Enter a name"></b-form-input>
+      <div class="row">
+        <div class="col lg-1">
+          <h3>{{msg}}   <b-badge>{{listName.length}}</b-badge></h3>
+        </div>
+      </div
+      <div class="row">
+        <div class="col lg-1">
+          <b-form-input class="col-md-12" type="text" v-model="inputName" placeholder="Enter a name"></b-form-input>
       
-      <b-btn  class="col-md-4" @click="clicked"  :disabled="inputName ? false : true">Add</b-btn>
-      <b-btn  class="col-md-4" router-link to="/Home" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
-      
+          <b-btn  class="col-sm-4" @click="clicked"  :disabled="inputName ? false : true">Add</b-btn>
+          <b-btn  class="col-sm-4" router-link to="/Home" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
+        </div>
+      </div>
     </div>
-   <!--
-  <ul class="list-group">
-    <li v-for="name in listName" class="list-group-item">
-      {{ name }}
-    </li>
-  </ul>
- <b-progress v-model="counter" :precision="1" :show-progress=true :animated=true ></b-progress>
-    
-    
-    <b-btn class="mt-4" v-b-modal.writename>Show Modal</b-btn>
-
-    <b-modal id="writename" title="Submit your name" >
-      <form>
-        <b-form-input type="text" placeholder="Enter your name"></b-form-input>
-      </form> 
-    </b-modal>-->
 </template>
 
 <script lang="ts">
@@ -44,7 +35,7 @@ export default class Index extends Vue {
   msg: string = 'Celebrity';
   seen: boolean = true;
   @Getter('NAMES') listName: Array<string>
-  @Getter('COUNTER') counter: Number;
+  @Getter('COUNTER') counter: number;
   clicked() : void {
     if (this.inputName){
       this.$store.commit('ADD_NAME', {name:this.inputName})

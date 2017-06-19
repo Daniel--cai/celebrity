@@ -1,10 +1,17 @@
 <template>
-  <div id="home" class="container">
-  <p>
-    `lsdkfgjlsksderedssdfg`
-    <router-link to="/">Go to Home</router-link>
-  </p>
-
+  <div id="home" class="container-fluid">
+  <div class="row">
+  <ul class="list-group">
+      <b-form-checkbox v-for="name in listName" key="name.id" >
+      {{name}}
+  </b-form-checkbox>
+  </ul>
+  </div>
+    <div class="row">
+    <b-btn class="col lg-12">Score</b-btn> 
+    <b-btn class="col lg-12">Duplicate</b-btn>
+    <b-btn class="col lg-12" router-link to="/">Done</b-btn>
+    </div>
   </div>
 </template>
 
@@ -36,7 +43,7 @@ export default class App extends Vue {
   msg: string = 'Celebrity';
   seen: boolean = true;
   @Getter('NAMES') listName: Array<string>
-  @Getter('COUNTER') counter: Number;
+  @Getter('COUNTER') counter: number;
   clicked(){
     if (this.inputName){
       this.$store.commit('ADD_NAME', {name:this.inputName})
