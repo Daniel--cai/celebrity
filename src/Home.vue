@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="container-fluid">
+  <div id="home" class="container">
   <div class="row">
   <ul class="list-group">
       <b-form-checkbox v-for="name in listName" key="name.id" >
@@ -8,9 +8,10 @@
   </ul>
   </div>
     <div class="row">
-    <b-btn class="col lg-12">Score</b-btn> 
-    <b-btn class="col lg-12">Duplicate</b-btn>
-    <b-btn class="col lg-12" router-link to="/">Done</b-btn>
+
+    <b-btn class="col md-2"><icon name="check" scale="2"></icon></b-btn> 
+    <b-btn  class="col md-2"><icon name="close" scale="2"></icon></b-btn>
+    <b-btn router-link to="/"  class="col md-2"><icon name="home" scale="2"></icon></b-btn>
     </div>
   </div>
 </template>
@@ -19,6 +20,10 @@
 import Vue from 'vue'
 import Component, { createDecorator } from 'vue-class-component'
 import { mapGetters, mapState } from 'vuex'
+
+import 'vue-awesome/icons/check'
+import 'vue-awesome/icons/home'
+import 'vue-awesome/icons/close'
 
 function Getter (getterType) {
   return createDecorator((options, key) => {

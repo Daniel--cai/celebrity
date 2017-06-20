@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
@@ -40,7 +39,12 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
-      }
+      },
+      {
+        test: /vue-icons/,
+        enforce: "post",
+        loader: "callback-loader",
+      },
     ]
   },
   resolve: {
@@ -58,6 +62,7 @@ module.exports = {
       template:'index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
+
 }
