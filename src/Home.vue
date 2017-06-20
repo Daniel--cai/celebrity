@@ -9,9 +9,9 @@
   </div>
     <div class="row">
 
-    <b-btn class="col md-2"><icon name="check" scale="2"></icon></b-btn> 
-    <b-btn  class="col md-2"><icon name="close" scale="2"></icon></b-btn>
-    <b-btn router-link to="/"  class="col md-2"><icon name="home" scale="2"></icon></b-btn>
+    <b-btn class="col md-2"><icon name="star" scale="2"></icon></b-btn> 
+    <b-btn  class="col md-2"><icon name="trash" scale="2"></icon></b-btn>
+    <b-btn router-link to="/"  class="col md-2 btn-success"><icon name="home" scale="2"></icon></b-btn>
     </div>
   </div>
 </template>
@@ -21,11 +21,11 @@ import Vue from 'vue'
 import Component, { createDecorator } from 'vue-class-component'
 import { mapGetters, mapState } from 'vuex'
 
-import 'vue-awesome/icons/check'
+import 'vue-awesome/icons/star'
 import 'vue-awesome/icons/home'
-import 'vue-awesome/icons/close'
+import 'vue-awesome/icons/trash'
 
-function Getter (getterType) {
+function Getter (getterType : string) {
   return createDecorator((options, key) => {
     if (!options.computed) options.computed = {}
     options.computed[key] = function () {
@@ -33,23 +33,13 @@ function Getter (getterType) {
     }
   })
 }
-
-function Dispatch (mutationType, payload){
-  return createDecorator((options,key)=>{
-      if (!options.methods) options.methods = {}
-      options.methods[key] = function(){
-        return this.$store.commit(mutationType, payload)
-      }
-  })
-}
-
 @Component
 export default class App extends Vue {
   msg: string = 'Celebrity';
   seen: boolean = true;
   @Getter('NAMES') listName: Array<string>
   @Getter('COUNTER') counter: number;
-  clicked(){
+  clicked(): void {
     if (this.inputName){
       this.$store.commit('ADD_NAME', {name:this.inputName})
     }
