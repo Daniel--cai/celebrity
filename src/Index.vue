@@ -10,7 +10,7 @@
           <b-form-input class="col-md-12" type="text" v-model="inputName" placeholder="Enter a name"></b-form-input>
       
           <b-btn  class="col-sm-4" @click="clicked"  :disabled="inputName ? false : true">Add</b-btn>
-          <b-btn  class="col-sm-4" router-link to="/Home" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
+          <b-btn  class="col-sm-4" router-link to="/Play" @click="clicked" :variant="'primary'" :disabled="listName.length ==0 ? true : false">Play</b-btn>
         </div>
       </div>
     </div>
@@ -20,29 +20,21 @@
 import Vue from 'vue'
 import Component, { createDecorator } from 'vue-class-component'
 import { mapGetters, mapState } from 'vuex'
-
-function Getter (getterType: string) {
-  return createDecorator((options, key) => {
-    if (!options.computed) options.computed = {}
-    options.computed[key] = function () {
-      return this.$store.getters[getterType]
-    }
-  })
-}
+import Getter from './helper'
 
 @Component
 export default class Index extends Vue {
   msg: string = 'Celebrity';
   seen: boolean = true;
+  inputName:string = ""
   @Getter('NAMES') listName: Array<string>
   @Getter('COUNTER') counter: number;
   clicked() : void {
     if (this.inputName){
-      this.$store.commit('ADD_NAME', {name:this.inputName})
+      this.$store.commit('ADD_NAME', this.inputName)
     }
     this.inputName = ""
   }
-  inputName:string=""
 }
 </script>
 <style scoped>

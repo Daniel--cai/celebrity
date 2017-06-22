@@ -2,8 +2,12 @@
   <div id="home" class="container">
   <div class="row">
   <ul class="list-group">
-      <b-form-checkbox v-for="name in listName" key="name.id" >
-      {{name}}
+      <b-form-checkbox 
+        v-for="(value, word) in withheld" 
+        key="name.id" 
+        :checked="value"
+        >
+      {{word}}
   </b-form-checkbox>
   </ul>
   </div>
@@ -37,7 +41,8 @@ function Getter (getterType : string) {
 export default class App extends Vue {
   msg: string = 'Celebrity';
   seen: boolean = true;
-  @Getter('NAMES') listName: Array<string>
+  
+  @Getter('WITHHELD') withheld: Array<string>
   @Getter('COUNTER') counter: number;
   clicked(): void {
     if (this.inputName){

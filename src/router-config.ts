@@ -1,5 +1,7 @@
 import Home from './Home.vue';  
 import Indexs from './Index.vue'
+import Countdown from './Play.vue'
+
 export const routes = [  
   {
     path:'/',
@@ -9,6 +11,11 @@ export const routes = [
   {
     path: '/Home',
     component: Home,
+    children: [],
+  },
+  {
+    path: '/Play',
+    component: Countdown,
     children: [],
   },
 ];
