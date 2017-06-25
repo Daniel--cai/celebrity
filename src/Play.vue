@@ -8,6 +8,8 @@
     <div class="row" v-else>
     <b-btn  @click="clicked" class="col md-2"><icon name="hourglass-start" scale="2"></icon></b-btn>
     </div>
+    <Graph></Graph>
+
   </div>
 </template>
 
@@ -17,8 +19,13 @@
     import { mapGetters, mapState } from 'vuex'
     import 'vue-awesome/icons/hourglass-start'
     import Getter from './helper'
-
-    @Component
+    import Graph from './Graph.vue'
+    
+    @Component({
+        components:{
+            "Graph": Graph
+        }
+    })
     export default class Play extends Vue {
         @Getter('STARTED') started: boolean;
         @Getter('NAMES') listName: Array<string>;
