@@ -2,7 +2,7 @@
     <div id="select" class="jumbotron">
       <div class="row">
         <div class="col lg-1">
-          <h3>{{msg}}   <b-badge>{{listName.length}}</b-badge></h3>
+          <h3>{{msg}}<b-badge>{{listName.length}}</b-badge></h3>
         </div>
       </div
       <div class="row">
@@ -25,7 +25,6 @@ import Getter from './helper'
 @Component
 export default class Index extends Vue {
   msg: string = 'Celebrity';
-  seen: boolean = true;
   inputName:string = ""
   @Getter('NAMES') listName: Array<string>
   @Getter('COUNTER') counter: number;

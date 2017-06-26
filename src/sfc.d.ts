@@ -6,11 +6,16 @@ declare module '*.vue' {
 declare interface State {
     counter: number
     score: Array<number>
-    names: Array<string>
-    withheld: Dictionary
+    names: Array<Word>
     started: boolean
 }
 
 declare interface Dictionary {
     [word: string]: boolean;
+}
+
+declare interface Word {
+    name : string
+    duplicate: boolean
+    withheld: boolean
 }

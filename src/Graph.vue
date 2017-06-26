@@ -1,43 +1,51 @@
 <template>
-  <svg width="500" height="270">
-    <g style="transform: translate(0, 10px)">
-      <path :d="line" />
-    </g>
-  </svg>
+  <div id='graph'>
+  </div>
 </template>
-<script>
+<script lang="ts">
 import * as d3 from 'd3';
-export default {
-  name: 'vue-line-chart',
-  data() {
-    return {
-      data: [99, 71, 78, 25, 36, 92],
-      line: '',
-    };
-  },
+import Vue from 'vue'
+import Component, { createDecorator } from 'vue-class-component'
+import { mapGetters, mapState } from 'vuex'
+import Getter from './helper'
+
+@Component
+export default class App extends Vue {
   mounted() {
-    this.calculatePath();
-  },
-  methods: {
-    getScales() {
-      const x = d3.scaleTime().range([0, 430]);
-      const y = d3.scaleLinear().range([210, 0]);
-      d3.axisLeft().scale(x);
-      d3.axisBottom().scale(y);
-      x.domain(d3.extent(this.data, (d, i) => i));
-      y.domain([0, d3.max(this.data, d => d)]);
-      return { x, y };
-    },
-    calculatePath() {
-      const scale = this.getScales();
-      const path = d3.line()
-        .x((d, i) => scale.x(i))
-        .y(d => scale.y(d))
-       
-      this.line = path(this.data);
-    },
-  },
-}
+
+    var parent = d3.select('div#graph');
+    var radius = 100
+    var border = 10
+    var twoPi = Math.PI * 2;
+    var color: string = '#E1499A'
+    var elapse: number = 8
+    var duration: number = 40
+    var progress:number = elapse/duration
+    setTimeout(function(){ duration++ }, 3000);
+    var arc = d3.arc()
+      .startAngle(0)
+      .innerRadius(radius)
+      .outerRadius(radius - border)
+      .cornerRadius(5)
+
+    var svg = parent.append('svg')
+      .attr('width', 300)
+      .attr('height', 300)
+      .append('g')
+      .attr('transform', 'translate(' + 300 / 2 + ',' + 300 / 2 + ')')
+    var path = svg.append('path')
+      .attr('class', 'background')
+      .attr('fill', '#ccc')
+      .attr('fill-opacity', 0.5)
+      .attr('d', arc.endAngle(twoPi))
+    var foreground = svg.append('path')
+    .attr('class', 'foreground')
+    .attr('fill', color)
+    .attr('fill-opacity', 1)
+    .attr('d', arc.endAngle(twoPi * progress))
+
+  }
+} 
 </script>
 
 <style scoped>

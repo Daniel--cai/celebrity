@@ -9,7 +9,6 @@
     <b-btn  @click="clicked" class="col md-2"><icon name="hourglass-start" scale="2"></icon></b-btn>
     </div>
     <Graph></Graph>
-
   </div>
 </template>
 
@@ -28,8 +27,7 @@
     })
     export default class Play extends Vue {
         @Getter('STARTED') started: boolean;
-        @Getter('NAMES') listName: Array<string>;
-        @Getter('WITHHELD') withheld: Dictionary
+        @Getter('NAMES') listName: Array<Word>;
         displayWord: string = ""
         clicked(){
             this.$store.commit('START', true)
@@ -49,15 +47,16 @@
 
         random(): void{
             var random = Math.floor(Math.random() * (this.listName.length))
-            this.displayWord = this.listName[random]
+            this.displayWord = this.listName[random].name
+            console.log('random')
             this.$store.commit('ADD_WITHHELD', {
                 word: this.displayWord, 
                 value: false
             })
             
-            this.listName.splice(this.listName.indexOf(this.displayWord), 1)
-            if (this.listName.length == 0)
-                this.finish()
+            //this.listName.splice(random, 1)
+            //if (this.listName.length == 0)
+            //    this.finish()
         }
         
         pass(){
